@@ -1,0 +1,142 @@
+.video {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  clip-path: polygon(100% 0, 100% 35%, 64% 55%, 0 35%, 0 0);
+  background-color: rgb(97, 97, 97);
+
+  &Bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0%;
+    top: 0%;
+
+    &0 {
+      @extend .videoBg;
+      background-color: rgb(233, 233, 233);
+      clip-path: polygon(100% 0, 100% 38%, 64% 59%, 0 38%, 0 0);
+      z-index: 1;
+    }
+
+    &1 {
+      @extend .videoBg;
+      background-color: rgba(219, 0, 135, 0.247);
+      clip-path: polygon(100% 0, 100% 35%, 64% 55%, 0 35%, 0 0);
+      z-index: 2;
+    }
+
+    &2 {
+      @extend .videoBg;
+      background-color: rgba(23, 0, 107, 0.329);
+      clip-path: polygon(100% 0, 100% 30%, 67% 47%, 0 30%, 0 0);
+      z-index: 3;
+    }
+
+    &3 {
+      @extend .videoBg;
+      background-color: rgba(3, 1, 39, 0.322);
+      clip-path: polygon(100% 0, 100% 27%, 41% 39%, 0 25%, 0 0);
+      z-index: 4;
+    }
+  }
+}
+
+.title {
+  color: #fff;
+  margin: auto;
+  font-size: 3rem;
+  text-align: center;
+
+  &Container {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+    left: 30%;
+    right: 50%;
+  }
+
+}
+
+.logo {
+  height: 15vw;
+}
+
+@media only screen and (max-width: 768px) {
+  .title {
+    &Container {
+      width: auto;
+      flex-direction: column-reverse;
+      left: 0;
+      right: 0;
+    }
+  }
+  .logo {
+    height: 120px;
+    margin: auto;
+  }
+}
+
+.about {
+  &Container {
+    padding-top: 50vh;
+    text-align: center;
+    width: 90%;
+    font-size: 1.2rem;
+    max-width: 640px;
+    margin: auto;
+  }
+
+  &Header {
+    color: #470e97;
+    font-size: 2rem;
+  }
+}
+
+.description {
+  white-space: pre-wrap;
+}
+
+.joinButtonContainer {
+  margin: auto;
+  padding: 10%;
+}
+
+.joinButton {
+  font-weight: 500;
+  background: linear-gradient(90deg, rgb(252, 157, 93) 0%, rgba(255, 0, 183, 1) 100%);
+
+  &:hover {
+    background-color: rgb(252, 157, 93);
+    background: linear-gradient(90deg, rgba(255, 180, 138, 1) 0%, rgba(249, 140, 218, 1) 100%);
+    box-shadow: 0px 0px 100px -6px #470e979d;
+  }
+}
+
+.count {
+  padding-inline: 2vw;
+  font-size: 5rem;
+  font-weight: 700;
+  text-align: center;
+
+  &All {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    max-width: 1080px;
+  }
+
+  &Container {
+    margin: auto;
+    text-align: center;
+    color: #350777;
+    font-size: 1.2rem;
+  }
+}
