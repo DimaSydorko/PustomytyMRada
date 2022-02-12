@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'antd/lib/modal/Modal'
-import { Button } from 'antd'
+import {Button} from "@mui/material";
 
 
 type Props = {
@@ -12,8 +12,9 @@ export const ButtonWithModal:React.FC<Props> = React.memo(
   ({setIsModalVisible, handleSubmit, isModalVisible}) => {
     return (
       <div>
-        <Button 
-          type="primary"
+        <Button
+          variant={'contained'}
+          color={"primary"}
           onClick={() => setIsModalVisible(true)}>
             Опублікувати
         </Button>

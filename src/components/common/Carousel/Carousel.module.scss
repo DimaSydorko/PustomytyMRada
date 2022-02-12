@@ -1,0 +1,13 @@
+.container {
+  margin: auto;
+  max-width: 400px;
+}
+
+.image {
+  height: 255px;
+  display: block;
+  max-width: 400px;
+  overflow: hidden;
+  width: 100%;
+  pointer-events: none;
+}

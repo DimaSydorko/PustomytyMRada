@@ -1,8 +1,9 @@
 import { Spin } from 'antd'
 import { CompassOutlined } from '@ant-design/icons'
-import './loader.less'
-const antIcon = <CompassOutlined className='spin-element' spin />;
+import styles from './loader.module.scss'
+
+const antIcon = <CompassOutlined className={styles.spinElement} spin />;
 
 export const Loader = () => {
-  return <Spin indicator={antIcon} className='loader'/>
+  return <Spin indicator={antIcon} className={styles.loader}/>
 } 

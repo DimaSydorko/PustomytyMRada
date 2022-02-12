@@ -1,7 +1,7 @@
 import React, { FC } from "react"
-import { DepartmentsT } from "../../../Utils/types"
-import "./members.less"
 import { DepartmentFC } from "./Department"
+import { DepartmentsT } from "../../../Utils/types"
+import styles from './members.module.scss'
 
 type PropsT = {
   departments: DepartmentsT
@@ -19,7 +19,7 @@ export const MemberUserPage:FC<PropsT> = React.memo(({departments}) => {
   
   return<>
     <h1>Учасники МРади</h1>
-    <div className="leadership">
+    <div className={styles.leadership}>
       {DepartmentF(true)}
     </div>
     {DepartmentF()}

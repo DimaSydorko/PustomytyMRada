@@ -1,5 +1,6 @@
 import React from 'react'
-import { Popconfirm, Button } from 'antd'
+import { Popconfirm } from 'antd'
+import {Button} from "@mui/material";
 
 type PropsType = {
   title: string,
@@ -35,8 +36,9 @@ const ConfirmButton:React.FC<PropsType> = ({title, confirmTitle, funcToCompleate
         okButtonProps={{ loading: confirmLoading }}
         onCancel={handleCancel}
       >
-        <Button 
-          danger 
+        <Button
+          color={"error"}
+          variant={'outlined'}
           onClick={()=>deletePostFunc()}>
           {title}
         </Button>

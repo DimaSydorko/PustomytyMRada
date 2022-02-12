@@ -1,0 +1,26 @@
+.post {
+  margin: auto;
+  width: 100%;
+  max-width: 960px;
+  &Container {
+    max-width: 1080px;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    flex-direction: column;
+  }
+  &Header {
+    font-size: 2rem;
+  }
+  &Text {
+    font-size: 1.5rem;
+    width: 80%;
+    margin: auto;
+    white-space: pre-wrap;
+  }
+  &Data {
+    font-size: 1rem;
+    font-style: italic;
+  }
+}

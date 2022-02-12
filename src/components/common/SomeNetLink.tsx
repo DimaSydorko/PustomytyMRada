@@ -1,3 +1,5 @@
+import React from "react";
+
 type SomeNetLinkT = {
   link: string | null
   name: string

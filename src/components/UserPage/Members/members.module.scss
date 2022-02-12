@@ -1,10 +1,21 @@
 
-.about-department{
-  white-space: pre-wrap;
-  width: 70vw;
-  max-width: 480px;
-  text-align: center;
-  margin: auto;
+.about {
+  &Department {
+    white-space: pre-wrap;
+    width: 70vw;
+    max-width: 480px;
+    text-align: center;
+    margin: auto;
+  }
+
+  &Member {
+    padding: 0.5%;
+    max-width: 240px;
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+  }
 }
 
 .leadership {
@@ -13,22 +24,13 @@
   flex-wrap: wrap;
 }
 
-.member-container {
+.memberContainer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.about-member {
-  padding: 0.5%;
-  max-width: 240px;
-  width: 40vw;
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
-}
-
-.ava-img {
+.avaImg {
   max-height: 120px;
   height: 20vw;
   border-radius: 180px;
@@ -39,21 +41,22 @@
   margin: auto;
 }
 
-.empty-ava{
+.emptyAva {
   max-height: 120px;
   height: 20vw;
-  border-radius: solid red 3px;
 }
 
-.full-name {
+.fullName {
   padding: 3%;
   font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
 }
-.soc-link{
+
+.socLink {
   margin: auto;
 }
-.cover-delate{
+
+.coverDelete {
   margin: auto;
 }

@@ -8,6 +8,9 @@ import { AppStateType } from "../../../redux/redux-store"
 import { Loader } from '../../common/loader/loader'
 import {fbDatabase} from "../../../Utils/firebase";
 import styles from './HomePage.module.scss';
+import MembersAdmin from "../../AdminPage/MembersAdmin";
+import PostsAdmin from "../../AdminPage/PostsAdmin";
+import EventAdminPage from "../../AdminPage/EventAdmin";
 
 const HomePage = () => {
   useFirestoreConnect(['members', 'posts'])
@@ -21,7 +24,7 @@ const HomePage = () => {
   }, [])
 
   return ((members && posts) ?
-    <div className={styles.homePage}>
+    <>
       <div className={styles.videoContainer}>
         <div className={styles.video}>
           <div className={styles.video}>
@@ -65,7 +68,11 @@ const HomePage = () => {
           РЕАЛІЗОВАНИХ ПРОЄКТІВ 
         </div>
       </div>
-    </div>
+      <PostsAdmin/>
+      <EventAdminPage/>
+      <MembersAdmin/>
+    </>
+
     : <Loader/>
   )
 }
