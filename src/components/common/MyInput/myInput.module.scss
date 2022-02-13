@@ -1,0 +1,44 @@
+@use 'src/App' as const;
+
+.container {
+  max-width: 70vw;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.input {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: const.$text-colour;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: solid 1px const.$primary-color;
+  transition: const.$transition;
+  width: 100%;
+  &:focus {
+    transition: const.$transition;
+    box-shadow: const.$box-shadow;
+  }
+  &:hover {
+    transition: const.$transition;
+    padding: 7px 11px;
+    border-width: 2px;
+  }
+  &Error {
+    border: solid 1px const.$error-color;
+    box-shadow: 4px 2px 22px -13px const.$error-color;
+  }
+}
+
+.textArea {
+  @extend .input;
+  resize: none;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: const.$error-color;
+  font-size: 1rem;
+  font-weight: 500;
+}

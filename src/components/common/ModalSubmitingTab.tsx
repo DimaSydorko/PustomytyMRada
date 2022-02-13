@@ -1,34 +1,37 @@
-import React from 'react'
-import Modal from 'antd/lib/modal/Modal'
-import {Button} from "@mui/material";
-
+import React, {useState} from 'react'
+import {Button, Modal} from "@mui/material";
 
 type Props = {
-  setIsModalVisible: (isModalVisible: boolean) => void
   handleSubmit: () => void
-  isModalVisible: boolean
 }
-export const ButtonWithModal:React.FC<Props> = React.memo(
-  ({setIsModalVisible, handleSubmit, isModalVisible}) => {
-    return (
-      <div>
-        <Button
-          variant={'contained'}
-          color={"primary"}
-          onClick={() => setIsModalVisible(true)}>
-            Опублікувати
-        </Button>
-        <Modal 
-          title="Публікація"
-          visible={isModalVisible} 
-          onOk={()=>{
-            handleSubmit()
-            setIsModalVisible(false)
-          }} 
-          onCancel={() => setIsModalVisible(false)}>
-          <p>Підтвердіть публікацію</p>
-        </Modal>
-      </div>
-    )
-  }
-)
+export default React.memo(function ButtonWithModal({handleSubmit}: Props) {
+  const [isModal, setIsModal] = useState<boolean>(false);
+  return (
+    <div>
+      <Button
+        variant={'contained'}
+        color={"primary"}
+        onClick={() => setIsModal(true)}>
+        Опублікувати
+      </Button>
+      <Modal
+        open={isModal}
+        onClose={() => setIsModal(false)}
+        aria-labelledby="Публікація"
+        aria-describedby="Підтвердіть публікацію"
+      >
+        <div>
+          <Button onClick={() => setIsModal(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => {
+            handleSubmit();
+            setIsModal(false);
+          }}>
+            Confirm
+          </Button>
+        </div>
+      </Modal>
+    </div>
+  )
+})

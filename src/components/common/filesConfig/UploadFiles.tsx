@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, Space, Upload } from 'antd'
-import { UploadOutlined } from '@ant-design/icons'
-import { UploadFile } from 'antd/lib/upload/interface'
-import { BlobType } from '../../../Utils/types'
+import {Button, Space, Upload} from 'antd'
+import {UploadOutlined} from '@ant-design/icons'
+import {UploadFile} from 'antd/lib/upload/interface'
+import {BlobType} from '../../../Utils/types'
 
 type Props = {
   maxUploadCount: number
@@ -10,10 +10,10 @@ type Props = {
   setNewFiles: (newFiles: Array<UploadFile<BlobType>> & Array<BlobType>) => void
 }
 
-export const UploadFiles: React.FC<Props> = ({maxUploadCount, fileList, setNewFiles}) => {
-    const onChange = ({ fileList: newFileList }: any) => {
-      setNewFiles(newFileList)
-    }
+export default function UploadFiles({maxUploadCount, fileList, setNewFiles}: Props) {
+  const onChange = ({fileList: newFileList}: any) => {
+    setNewFiles(newFileList)
+  }
   return (
     <div>
       <Space direction="vertical" size="large">
@@ -24,9 +24,9 @@ export const UploadFiles: React.FC<Props> = ({maxUploadCount, fileList, setNewFi
           fileList={fileList}
           onChange={onChange}
         >
-          <Button icon={<UploadOutlined />}>Upload (Max: {maxUploadCount})</Button>
+          <Button icon={<UploadOutlined/>}>Upload (Max: {maxUploadCount})</Button>
         </Upload>
       </Space>
     </div>
-  ) 
+  )
 }

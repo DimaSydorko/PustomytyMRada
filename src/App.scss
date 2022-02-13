@@ -1,0 +1,32 @@
+$primary-color: #4f5cf8;
+$hover-color: #a92ef8;
+$text-colour: #262626;
+$error-color: #ff1a36;
+
+
+$box-shadow: 4px 2px 28px -13px rgba(34, 60, 80, 0.6);
+$transition: all 0.15s linear;
+
+img {
+  pointer-events: none;
+}
+html {
+  font-size: 16px;
+  color: #313131;
+}
+body {
+  background-color: #ffffff;
+}
+h1{
+  font-size: 2.5rem;
+  color: rgb(46, 0, 88);
+}
+h2{
+  font-size: 1.6rem;
+  color: rgb(69, 0, 134);
+}
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
+}
