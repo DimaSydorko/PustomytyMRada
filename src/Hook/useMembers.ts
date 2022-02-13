@@ -16,13 +16,16 @@ export const addNewMember = (newMember: NewMember): ThunkType => {
     }
     await apiFiles.add(newMember.profileImg, 'members', newMember.fullName, 'images', callBackImg)
 
-    firebase.firestore().collection('members').add({
-      department: newMember.department,
-      fullName: newMember.fullName,
-      instgramLink: newMember.instgramLink,
-      facebookLink: newMember.facebookLink,
-      profileImg: newImagesUrl,
-    })
+    await firebase
+      .firestore()
+      .collection('members')
+      .add({
+        department: newMember.department,
+        fullName: newMember.fullName,
+        instagramLink: newMember.instagramLink,
+        facebookLink: newMember.facebookLink,
+        profileImg: newImagesUrl,
+      })
   }
 }
 

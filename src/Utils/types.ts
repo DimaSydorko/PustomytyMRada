@@ -79,13 +79,13 @@ export type MemberT = {
   fullName: string,
   profileImg: Array<FileInStore>,
   about: string | null,
-  instgramLink: string | null,
+  instagramLink: string | null,
   facebookLink: string | null,
 }
 export type NewMember = {
   department: string,
   fullName: string,
-  instgramLink: string | null,
+  instagramLink: string | null,
   facebookLink: string | null,
   profileImg: Array<BlobType>,
 }

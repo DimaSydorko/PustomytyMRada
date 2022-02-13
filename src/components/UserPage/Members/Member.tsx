@@ -28,14 +28,14 @@ export const Member: React.FC<MemberProps> = ({member}) => {
         <SomeNetLink link={member.facebookLink} name={'Facebook'} img={<FacebookOutlined/>}/>
       </div>
       <div className={styles.socLink}>
-        <SomeNetLink link={member.instgramLink} name={'Instagram'} img={<InstagramOutlined/>}/>
+        <SomeNetLink link={member.instagramLink} name={'Instagram'} img={<InstagramOutlined/>}/>
       </div>
       {isAdmin ? 
         <div className={styles.coverDelete}>
           <ConfirmButton
             title={'Видалити учасника'} 
             confirmTitle={'Ви справді хочете видалити цього учасника?'}
-            funcToCompleate={ifConfirm} 
+            funcToComplete={ifConfirm}
           />
         </div> : null
       }

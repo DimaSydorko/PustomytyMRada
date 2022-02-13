@@ -1,27 +1,31 @@
-import React, { FC } from "react"
-import { DepartmentFC } from "./Department"
-import { DepartmentsT } from "../../../Utils/types"
+import React, {useEffect, useState} from "react"
+import {DepartmentFC} from "./Department"
+import {fbDatabase} from "../../../Utils/firebase";
+import {DepartmentsT} from "../../../Utils/types"
 import styles from './members.module.scss'
 
-type PropsT = {
-  departments: DepartmentsT
-}
+export default function MemberUser() {
+  const [departments, setDepartments] = useState({} as DepartmentsT)
+  useEffect(() => {
+    fbDatabase
+      .ref("Department")
+      .on("value", (e) => setDepartments(e.val()))
+  }, [])
 
-export const MemberUserPage:FC<PropsT> = React.memo(({departments}) => {
   function DepartmentF(isLeadership = false) {
     let arr = []
-    for (let key in departments){
+    for (let key in departments) {
       //@ts-ignore
       if (isLeadership === departments[key].isLeadership) arr.push(departments[key])
     }
-    return arr.map((e, i) => <DepartmentFC department={e} key={i}/>) 
+    return arr.map((e, i) => <DepartmentFC department={e} key={i}/>)
   }
-  
-  return<>
+
+  return <>
     <h1>Учасники МРади</h1>
     <div className={styles.leadership}>
       {DepartmentF(true)}
     </div>
     {DepartmentF()}
   </>
-})
+}

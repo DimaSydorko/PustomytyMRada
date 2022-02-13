@@ -1,43 +1,43 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Redirect } from "react-router"
-import { Form, Formik } from 'formik'
-import { SubmitButton, Input, FormItem } from "formik-antd"
-import { Typography, Row, Col, Button } from 'antd'
+import React, {useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux"
+import {Redirect} from "react-router"
+import {Form, Formik} from 'formik'
+import {SubmitButton, Input, FormItem} from "formik-antd"
+import {Typography, Row, Col, Button} from 'antd'
 import * as yup from 'yup'
-import { AppStateType } from "../../redux/redux-store"
-import { login, setIsAuth } from "../../redux/adminAuth-reducer"
+import {AppStateType} from "../../redux/redux-store"
+import {login, setIsAuth} from "../../redux/adminAuth-reducer"
 import firebase from "../../Utils/firebase";
 
-const { Title } = Typography
+const {Title} = Typography
 
 const validationSchema = yup.object().shape({
   password: yup.string()
-    .required('якщо ви не адмін то не варто вводити пароль'),
+    .required('якщо ви не адміністратор сайту то не варто вводити пароль'),
   email: yup.string()
-    .required('якщо ви не адмін то не варто вводити пошту')
+    .required('якщо ви не адміністратор сайту то не варто вводити пошту')
 })
 
-export const AdminLogin = React.memo(() => {
+export default function AdminLogin() {
   const dispatch = useDispatch()
-  const isAuth = useSelector((state:AppStateType) => state.adminAuth.isAuth)
-  const loginError = useSelector((state:AppStateType) => state.adminAuth.loginError)
+  const isAuth = useSelector((state: AppStateType) => state.adminAuth.isAuth)
+  const loginError = useSelector((state: AppStateType) => state.adminAuth.loginError)
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user)=> {
+    firebase.auth().onAuthStateChanged((user) => {
       user ? dispatch(setIsAuth(true)) : dispatch(setIsAuth(false))
     })
   }, [dispatch])
-  
+
   if (isAuth) {
     return <Redirect to={"/admin/posts"}/>
   }
- 
-  return(
-    <Formik 
+
+  return (
+    <Formik
       initialValues={{
         password: '',
-        email: '', 
+        email: '',
       }}
       validationSchema={validationSchema}
       onSubmit={formData => {
@@ -46,11 +46,11 @@ export const AdminLogin = React.memo(() => {
           formData.password,
         ))
       }}>
-        {({handleSubmit}) => (
-          <Form onSubmit={handleSubmit}>
-            <Row>
+      {({handleSubmit}) => (
+        <Form onSubmit={handleSubmit}>
+          <Row>
             <Title level={3}>Login</Title>
-            <Col span={3}></Col>
+            <Col span={3}/>
             <Col span={4}>
               <FormItem name="email" label="Email">
                 <Input name="email" placeholder="Email"/>
@@ -64,10 +64,10 @@ export const AdminLogin = React.memo(() => {
                   <SubmitButton>Sign In</SubmitButton>
                 </Button.Group>
               </div>
-              </Col>
-            </Row>
-          </Form>
-        )}
+            </Col>
+          </Row>
+        </Form>
+      )}
     </Formik>
   )
-})
+}

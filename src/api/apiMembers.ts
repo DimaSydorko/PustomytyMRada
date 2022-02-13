@@ -11,7 +11,7 @@ export const apiMembers = {
     firestore.collection('members').add({
       department: newMember.department,
       fullName: newMember.fullName,
-      instgramLink: newMember.instgramLink,
+      instagramLink: newMember.instagramLink,
       facebookLink: newMember.facebookLink,
       profileImg: newImagesUrl,
     })

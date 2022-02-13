@@ -1,20 +1,16 @@
 import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {Col, DatePicker, Row, Space, Typography} from 'antd'
 import {Form, Formik} from 'formik'
+import {FormItem, Input} from "formik-antd"
 import * as yup from 'yup'
-import {Row, Col, Typography, Space, DatePicker} from 'antd'
-import {Input, FormItem} from "formik-antd"
+import moment from 'moment'
 import {UploadImges} from '../common/filesConfig/uploadImges'
-import {compose} from 'redux'
-import {useDispatch, useSelector} from 'react-redux'
-import {withRouter} from 'react-router-dom'
 import {addNewPost} from "../../Hook/usePost"
 import {ButtonWithModal} from '../common/ModalSubmitingTab'
 import {UploadFiles} from '../common/filesConfig/uploadFiles'
 import {UploadFile} from 'antd/lib/upload/interface'
-import moment from 'moment'
 import {BlobType} from '../../Utils/types'
-import {AppStateType} from '../../redux/redux-store'
-import {PostUserPage} from '../UserPage/Posts/PostsUser'
 
 const {TextArea} = Input
 const {Title} = Typography
@@ -26,8 +22,7 @@ const validationSchema = yup.object().shape({
     .required('Пост повинен містити текст'),
 })
 
-const PostAdminPage = React.memo(() => {
-  const isAdmin = useSelector((state: AppStateType) => state.adminAuth.isAuth)
+export default function PostAdminPage() {
   const dispatch = useDispatch()
 
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -44,84 +39,72 @@ const PostAdminPage = React.memo(() => {
   }
 
   return (
-    <div>
-      {
-        isAdmin ?
-          <Formik
-            initialValues={{newText: '', newHeader: ''}}
-            validationSchema={validationSchema}
-            onSubmit={(formData, {resetForm}) => {
-              if (!newData) newData = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
-              dispatch(addNewPost({
-                Header: formData.newHeader,
-                Text: formData.newText,
-                Images: newImages,
-                Data: newData,
-                Files: newFiles,
-              }))
-              setIsModalVisible(false)
-              resetForm()
-              setNewFiles([])
-              setNewImages([])
-            }}>
+    <Formik
+      initialValues={{newText: '', newHeader: ''}}
+      validationSchema={validationSchema}
+      onSubmit={(formData, {resetForm}) => {
+        if (!newData) newData = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
+        dispatch(addNewPost({
+          Header: formData.newHeader,
+          Text: formData.newText,
+          Images: newImages,
+          Data: newData,
+          Files: newFiles,
+        }))
+        setIsModalVisible(false)
+        resetForm()
+        setNewFiles([])
+        setNewImages([])
+      }}>
 
-            {({handleSubmit}) => (
-              <Form>
+      {({handleSubmit}) => (
+        <Form>
 
-                <Title level={2}>Написати пост:</Title>
-                <Row>
-                  <Col span={3}/>
-                  <Col span={15}>
-                    <Space direction="vertical">
-                      <DatePicker
-                        format="YYYY-MM-DD"
-                        disabledDate={disabledDate}
-                        onChange={onchangeDataTime}
-                      />
-                    </Space>
-                    <FormItem name="newHeader">
-                      <Input
-                        name="newHeader"
-                        placeholder="Заголовок для поста"
-                        autoComplete="off"
-                      />
-                    </FormItem>
-                    <FormItem name="newText">
-                      <TextArea
-                        name="newText"
-                        placeholder="Тут ви можете написати новий пост..."
-                        autoSize={{minRows: 2}}
-                        showCount
-                      />
-                    </FormItem>
-                    <UploadImges
-                      imgCount={5}
-                      fileList={newImages}
-                      setNewFiles={setNewImages}
-                    />
-                    <UploadFiles
-                      maxUploadCount={5}
-                      fileList={newFiles}
-                      setNewFiles={setNewFiles}
-                    />
-                    <ButtonWithModal
-                      setIsModalVisible={setIsModalVisible}
-                      isModalVisible={isModalVisible}
-                      handleSubmit={handleSubmit}
-                    />
-                  </Col>
-                </Row>
-              </Form>
-            )}
-          </Formik>
-          : null
-      }
-      <PostUserPage/>
-    </div>
+          <Title level={2}>Написати пост:</Title>
+          <Row>
+            <Col span={3}/>
+            <Col span={15}>
+              <Space direction="vertical">
+                <DatePicker
+                  format="YYYY-MM-DD"
+                  disabledDate={disabledDate}
+                  onChange={onchangeDataTime}
+                />
+              </Space>
+              <FormItem name="newHeader">
+                <Input
+                  name="newHeader"
+                  placeholder="Заголовок для поста"
+                  autoComplete="off"
+                />
+              </FormItem>
+              <FormItem name="newText">
+                <TextArea
+                  name="newText"
+                  placeholder="Тут ви можете написати новий пост..."
+                  autoSize={{minRows: 2}}
+                  showCount
+                />
+              </FormItem>
+              <UploadImges
+                imgCount={5}
+                fileList={newImages}
+                setNewFiles={setNewImages}
+              />
+              <UploadFiles
+                maxUploadCount={5}
+                fileList={newFiles}
+                setNewFiles={setNewFiles}
+              />
+              <ButtonWithModal
+                setIsModalVisible={setIsModalVisible}
+                isModalVisible={isModalVisible}
+                handleSubmit={handleSubmit}
+              />
+            </Col>
+          </Row>
+        </Form>
+      )}
+    </Formik>
   )
-})
-
-
-export default compose<React.ComponentType>(
-  withRouter,
-)(PostAdminPage)
+}

@@ -5,10 +5,10 @@ import {Button} from "@mui/material";
 type PropsType = {
   title: string,
   confirmTitle: string,
-  funcToCompleate: () => void
+  funcToComplete: () => void
 }
 
-const ConfirmButton:React.FC<PropsType> = ({title, confirmTitle, funcToCompleate}) => {
+const ConfirmButton:React.FC<PropsType> = ({title, confirmTitle, funcToComplete}) => {
   const [visible, setVisible] = React.useState(false)
   const [confirmLoading, setConfirmLoading] = React.useState(false)
     
@@ -16,7 +16,7 @@ const ConfirmButton:React.FC<PropsType> = ({title, confirmTitle, funcToCompleate
     setConfirmLoading(true)
     setTimeout(() => {
       setVisible(false)
-      funcToCompleate()
+      funcToComplete()
       setConfirmLoading(false)
     }, 2000)
   }

@@ -47,7 +47,7 @@ export const EventCard: React.FC<MyOvnPostPropsType> = ({event}) => {
         <ConfirmButton
           title={'Видалити подію'}
           confirmTitle={'Ви справді хочете видалити ць подію?'}
-          funcToCompleate={ifConfirm}
+          funcToComplete={ifConfirm}
         />
       )}
     </Card>

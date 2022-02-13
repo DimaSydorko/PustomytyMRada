@@ -36,7 +36,7 @@ export const Post: React.FC<MyOvnPostPropsType> = React.memo(
             <ConfirmButton
               title={'Видалити пост'}
               confirmTitle={'Ви справді хочете видалити цей пост?'}
-              funcToCompleate={ifConfirm}
+              funcToComplete={ifConfirm}
             /> : null
           }
           <div className={styles.postData}>{post.Data}</div>
