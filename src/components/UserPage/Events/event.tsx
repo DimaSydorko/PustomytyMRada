@@ -4,7 +4,7 @@ import {Card, Collapse} from 'antd'
 import {CaretRightOutlined, EnvironmentOutlined, FacebookOutlined} from '@ant-design/icons'
 import ConfirmButton from '../../common/ConfirmButton'
 import {Event} from '../../../Utils/types'
-import {ImgCarousel} from '../../common/Carousel/imgCarousel'
+import {Carousel} from '../../common/Carousel/Carousel'
 import {SomeNetLink} from '../../common/SomeNetLink'
 import {deleteEvent} from '../../../Hook/useEvent'
 import {AppStateType} from '../../../redux/redux-store'
@@ -38,7 +38,7 @@ export const EventCard: React.FC<MyOvnPostPropsType> = ({event}) => {
         <Panel header={'Детальніше про подію'} key="1">
           <p>{event.text}</p>
           <SomeNetLink link={event.link} name={'Facebook'} img={<FacebookOutlined/>}/>
-          <ImgCarousel postImages={event.sponsors.images}/>
+          <Carousel postImages={event.sponsors.images}/>
           {event.sponsors.name && `Спонсори: ${event.sponsors.name}`}
         </Panel>
       </Collapse>

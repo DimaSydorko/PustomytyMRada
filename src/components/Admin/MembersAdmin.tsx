@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
+import {MenuItem, Select} from '@mui/material';
 import {Form, Formik, FormikValues} from 'formik'
 import * as yup from 'yup'
-import {Select} from 'antd'
-import {FormItem} from "formik-antd"
 import {UploadFile} from 'antd/lib/upload/interface'
 import {addNewMember} from '../../Hook/useMembers'
-import ButtonWithModal from '../common/ModalSubmitingTab'
-import UploadImages from '../common/filesConfig/UploadImages'
+import ButtonWithModal from '../common/ButtonWIthModalSubmit/ButtonWIthModalSubmit'
+import UploadImages from '../common/UploadFiles/UploadImages'
 import MyInput from "../common/MyInput/MyInput";
 import {fbDatabase} from "../../Utils/firebase";
 import {BlobType, DepartmentsT} from '../../Utils/types'
@@ -39,14 +38,14 @@ export default function MembersAdminPage() {
       //@ts-ignore
       selects.push({name: departments[key].name, key: key, header: departments[key].header})
     }
-    return <FormItem name="Department" label="Спеціалізація">
+    return <Form name="Department" placeholder="Спеціалізація">
       <Select
         defaultValue={selects[0].name}
-        onChange={value => setDepartment(value)}
+        onChange={e => setDepartment(e.target.value)}
       >
-        {selects.map(e => <Select.Option value={e.name} key={e.key}>{e.header}</Select.Option>)}
+        {selects.map(e => <MenuItem value={e.name} key={e.key}>{e.header}</MenuItem>)}
       </Select>
-    </FormItem>
+    </Form>
   }
 
   const onSubmit = (formData: FormikValues, {resetForm}: { resetForm: () => void }) => {
@@ -81,8 +80,8 @@ export default function MembersAdminPage() {
               <MyInput name={"FullName"} placeholder={"Повне Ім`я"}/>
               <MyInput name={"InstagramLink"} placeholder={"Силка на Instagram"}/>
               <MyInput name={"FacebookLink"} placeholder={"Силка на Facebook"}/>
-              <UploadImages imgCount={1} isCrop={true} fileList={newImg} setNewFiles={setNewImg}/>
-              <ButtonWithModal handleSubmit={handleSubmit}/>
+              {/*<UploadImages imgCount={1} isCrop={true} fileList={newImg} setNewFiles={setNewImg}/>*/}
+              <ButtonWithModal header={'Підтвердіть нового учасника'} handleSubmit={handleSubmit}/>
             </Form>
           )
         }

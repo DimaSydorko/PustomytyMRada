@@ -1,14 +1,13 @@
 import React from 'react'
 import {message, Upload} from 'antd'
 import {UploadFile} from 'antd/lib/upload/interface'
-import ImgCrop from 'antd-img-crop'
 import {BlobType} from '../../../Utils/types'
 
 type Props = {
-  imgCount: number
-  isCrop?: boolean
-  fileList: Array<BlobType> & Array<UploadFile<BlobType>>
-  setNewFiles: (newFiles: Array<UploadFile<BlobType>> & Array<BlobType>) => void
+  imgCount: number;
+  isCrop?: boolean;
+  fileList?: BlobType[];
+  setNewFiles: (newFiles: BlobType[]) => void;
 }
 
 export default function UploadImages({fileList, setNewFiles, imgCount, isCrop = false}: Props) {
@@ -42,28 +41,16 @@ export default function UploadImages({fileList, setNewFiles, imgCount, isCrop = 
     }
   }
   return <div>
-    {isCrop ?
-      <ImgCrop shape='round'>
-        <Upload
-          action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-          listType="picture-card"
-          fileList={fileList}
-          onChange={onChange}
-        >
-          {fileList.length < imgCount && 'додати зображення'}
-        </Upload>
-      </ImgCrop> :
-      <Upload
-        {...uploadValidation as any}
-        action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-        name="image"
-        listType="picture-card"
-        fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}
-      >
-        {fileList.length < imgCount && 'додати зображення'}
-      </Upload>
-    }
+    <Upload
+      {...uploadValidation as any}
+      action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+      name="image"
+      listType="picture-card"
+      fileList={fileList}
+      onChange={onChange}
+      onPreview={onPreview}
+    >
+      {fileList && fileList.length < imgCount && 'додати зображення'}
+    </Upload>
   </div>
 }

@@ -1,0 +1,40 @@
+@use 'src/App' as const;
+
+.container {
+  background: const.$color_white;
+  max-width: 720px;
+  min-width: 350px;
+  width: 100%;
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &Buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    margin-top: 20px;
+  }
+}
+
+.text {
+  &Header {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: const.$color_text;
+  }
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  margin: 20px 0;
+}

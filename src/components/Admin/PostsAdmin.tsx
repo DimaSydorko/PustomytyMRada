@@ -1,16 +1,12 @@
 import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
 import {TextField} from "@mui/material";
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import {Form, Formik} from 'formik'
 import * as yup from 'yup'
-import {UploadFile} from 'antd/lib/upload/interface'
-import {addNewPost} from "../../Hook/usePost"
-import UploadImages from '../common/filesConfig/UploadImages'
-import ButtonWithModal from '../common/ModalSubmitingTab'
-import UploadFiles from "../common/filesConfig/UploadFiles";
+import usePost from "../../Hook/UsePost"
+import ButtonWithModal from '../common/ButtonWIthModalSubmit/ButtonWIthModalSubmit'
+import UploadFiles from "../common/UploadFiles/UploadFiles";
 import MyInput from "../common/MyInput/MyInput";
-import {BlobType} from '../../Utils/types'
 
 
 const validationSchema = yup.object().shape({
@@ -29,24 +25,27 @@ type FormFunctionType = {
 }
 
 export default function PostAdminPage() {
-  const dispatch = useDispatch()
-
-  const [newFiles, setNewFiles] = useState<BlobType[] & UploadFile<BlobType>[]>([])
-  const [newImages, setNewImages] = useState<BlobType[] & UploadFile<BlobType>[]>([])
+  const { addNewPost } = usePost()
+  const [newFiles, setNewFiles] = useState<Blob[] | undefined>()
+  const [newImages, setNewImages] = useState<Blob[] | undefined>()
   const [newData, setNewData] = useState<string>(new Date().toDateString())
 
   function onchangeDataTime(date: string | null) {
     date && setNewData(date)
   }
 
+  const onAddFile = (file: Blob) => {
+    setNewFiles(value => [...(value || []), file])
+  }
+
   const onSubmit = ({newHeader, newText}: FormType, {resetForm}: FormFunctionType) => {
-    dispatch(addNewPost({
-      Header: newHeader,
-      Text: newText,
-      Images: newImages,
-      Data: newData,
-      Files: newFiles,
-    }))
+    addNewPost({
+      header: newHeader,
+      text: newText,
+      images: newImages,
+      data: newData,
+      files: newFiles,
+    })
     resetForm()
     setNewFiles([])
     setNewImages([])
@@ -70,9 +69,9 @@ export default function PostAdminPage() {
           />
           <MyInput name="newHeader" placeholder="Заголовок для поста"/>
           <MyInput type='textarea' name="newText" contentEditable placeholder="Тут ви можете написати новий пост..."/>
-          <UploadImages imgCount={5} fileList={newImages} setNewFiles={setNewImages}/>
-          <UploadFiles maxUploadCount={5} fileList={newFiles} setNewFiles={setNewFiles}/>
-          <ButtonWithModal handleSubmit={handleSubmit}/>
+          {/*<UploadImages imgCount={5} fileList={newImages} setNewFiles={setNewImages}/>*/}
+          <UploadFiles accept={'image/*'} maxUploadCount={5} onAddFile={onAddFile} files={newFiles}/>
+          <ButtonWithModal header={'Підтвердіть піблікацію поста'} handleSubmit={handleSubmit}/>
         </Form>
       )}
     </Formik>

@@ -1,0 +1,41 @@
+@use 'src/App' as const;
+
+.upload {
+  display: none;
+  &Image {
+    &Button {
+      border: const.$color_primary 2px dashed;
+      border-radius: 50%;
+      height: 72px;
+      width: 72px;
+      cursor: pointer;
+      transition: const.$transition;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      &:hover {
+        border: const.$color_text 2px dashed;
+        box-shadow: const.$box-shadow;
+      }
+    }
+    &Preview {
+      height: calc(0.5 * 255px);
+      display: block;
+      max-width: calc(0.5 * 400px);
+      position: relative;
+      overflow: hidden;
+      pointer-events: none;
+      &Container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px
+      }
+    }
+  }
+
+  &Error {
+    color: const.$color_error;
+    margin: 4px 24px 8px;
+  }
+}

@@ -10,24 +10,32 @@
   font-size: 1.4rem;
   font-weight: 400;
   margin-bottom: 6px;
-  color: const.$text-colour;
+  color: const.$color_text;
   padding: 8px 12px;
   border-radius: 8px;
-  border: solid 1px const.$primary-color;
+  border: solid 1px const.$color_primary;
   transition: const.$transition;
   width: 100%;
+
   &:focus {
     transition: const.$transition;
     box-shadow: const.$box-shadow;
   }
+
   &:hover {
     transition: const.$transition;
     padding: 7px 11px;
     border-width: 2px;
+    box-shadow: const.$box-shadow;
   }
+
   &Error {
-    border: solid 1px const.$error-color;
-    box-shadow: 4px 2px 22px -13px const.$error-color;
+    border: solid 1px const.$color_error;
+
+    &:hover {
+      box-shadow: 4px 2px 22px -13px const.$color_error;
+    }
+  ;
   }
 }
 
@@ -38,7 +46,7 @@
 }
 
 .error {
-  color: const.$error-color;
+  color: const.$color_error;
   font-size: 1rem;
   font-weight: 500;
 }

@@ -12,40 +12,40 @@ export type BlobType = {
   thumUrl?: string
 }
 export type FileInStore = {
-  name: string
   id: string
   url: string
+  name: string
 }
 
 export type PostPage = {
-  posts: Array<PostType>
+  posts: PostType[]
 }
 export type PostType = {
   id: string
-  Header: string
-  Text: string
-  Images: Array<FileInStore>
-  Data: string
-  Files: Array<FileInStore>
+  header: string
+  text: string
+  images: FileInStore[]
+  data: string
+  files: FileInStore[]
 }
 export type NewPost = {
-  Header: string
-  Text: string
-  Images: Array<BlobType>
-  Data: string
-  Files: Array<BlobType>
+  header: string
+  text: string
+  images?: Blob[]
+  data: string
+  files?: Blob[]
 }
 
 
 export type EventPage = {
-  events: Array<Event>
+  events: Event[]
 }
 export type Event = {
   id: string
   header: string
   text: string
   sponsors: {
-    images: Array<FileInStore>
+    images: FileInStore[]
     name: string | null 
   }  
   dataTime: string
@@ -66,18 +66,18 @@ export type NewEvent = {
   }
   sponsors: {
     name: string | null 
-    images: Array<BlobType>
+    images: BlobType[]
   }  
 }
 
 export type MemberPage = {
-  Members: Array<MemberT>
+  Members: MemberT[]
 }
 export type MemberT = {
   id: string,
   department: string,
   fullName: string,
-  profileImg: Array<FileInStore>,
+  profileImg: FileInStore[],
   about: string | null,
   instagramLink: string | null,
   facebookLink: string | null,
@@ -87,7 +87,7 @@ export type NewMember = {
   fullName: string,
   instagramLink: string | null,
   facebookLink: string | null,
-  profileImg: Array<BlobType>,
+  profileImg: BlobType[],
 }
 
 
@@ -101,7 +101,7 @@ export type DepartmentsT = {
   Culture: DepartmentT
   Eco: DepartmentT
   Education: DepartmentT
-  Finace: DepartmentT
+  Finance: DepartmentT
   Pr: DepartmentT
   Chairman: DepartmentT
   Surrogate: DepartmentT

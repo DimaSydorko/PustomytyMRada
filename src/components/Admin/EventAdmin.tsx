@@ -3,11 +3,11 @@ import {useDispatch} from "react-redux"
 import {Form, Formik, FormikValues} from "formik"
 import * as yup from "yup"
 import {TextField} from "@mui/material";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import {DesktopDateTimePicker} from "@mui/lab";
 import {UploadFile} from "antd/lib/upload/interface"
 import {addNewEvent} from "../../Hook/useEvent"
-import ButtonWithModal from "../common/ModalSubmitingTab"
-import UploadImages from "../common/filesConfig/UploadImages"
+import ButtonWithModal from "../common/ButtonWIthModalSubmit/ButtonWIthModalSubmit"
+import UploadImages from "../common/UploadFiles/UploadImages"
 import MyInput from "../common/MyInput/MyInput";
 import {BlobType} from "../../Utils/types"
 
@@ -68,9 +68,9 @@ export default function EventAdmin() {
       {({handleSubmit}) => (
         <Form>
           <h2>Створити нову подію:</h2>
-          <DesktopDatePicker
+          <DesktopDateTimePicker
             label="Date desktop"
-            inputFormat="MM/dd/yyyy"
+            inputFormat="MM/dd/yyyy hh:mm"
             value={newDataTime}
             disablePast
             onChange={date => date && setNewDataTime(date)}
@@ -83,9 +83,9 @@ export default function EventAdmin() {
           <MyInput name={'locationLink'} placeholder={"Силка на місце проведення"}/>
           <MyInput name={'sponsorsName'} placeholder={"Спонсори події"}/>
 
-          <UploadImages imgCount={5} fileList={newImages} setNewFiles={setNewImages}/>
+          {/*<UploadImages imgCount={5} fileList={newImages} setNewFiles={setNewImages}/>*/}
 
-          <ButtonWithModal handleSubmit={handleSubmit}/>
+          <ButtonWithModal header={'Підтвердіть піблікацію події'} handleSubmit={handleSubmit}/>
         </Form>
       )}
     </Formik>

@@ -15,11 +15,11 @@ export default function HomeScreen() {
   return (
     <>
       <Description/>
-      {isAdmin && <PostsAdmin/>}
+      {!isAdmin && <PostsAdmin/>}
       <PostsUser/>
-      {isAdmin && <EventAdmin/>}
+      {!isAdmin && <EventAdmin/>}
       <EventUserPage/>
-      {isAdmin && <MembersAdmin/>}
+      {!isAdmin && <MembersAdmin/>}
       <MemberUser/>
     </>
   )

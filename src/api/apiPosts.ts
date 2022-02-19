@@ -1,23 +1,29 @@
-import { FileInStore } from '../Utils/types'
-import { NewPost } from "../Utils/types"
+import {FileInStore} from '../Utils/types'
+import {NewPost} from "../Utils/types"
+import {firestore} from "../Utils/firebase";
 
 export const apiPosts = {
   set(
-    newPost: NewPost, 
-    getFirebase: () => any,
-    newFilesUrl: Array<FileInStore>, 
-    newImagesUrl: Array<FileInStore>,
+    newPost: NewPost,
+    newFilesUrl: FileInStore[],
+    newImagesUrl: FileInStore[],
   ) {
-    const firestore = getFirebase().firestore()      
-    firestore.collection('posts').add({
-      Header: newPost.Header,
-      Text: newPost.Text,
-      Data: newPost.Data,
-      Files: newFilesUrl,
-      Images: newImagesUrl,
-    })
+    firestore
+      .collection('posts')
+      .add({
+        header: newPost.header,
+        text: newPost.text,
+        data: newPost.data,
+        files: newFilesUrl,
+        images: newImagesUrl,
+      })
+      .catch(err => console.error(err))
   },
-  delete(id: string, getFirebase: ()=>any) {
-    getFirebase().firestore().collection('posts').doc(id).delete()
+  delete(id: string) {
+    firestore
+      .collection('posts')
+      .doc(id)
+      .delete()
+      .catch(err => console.error(err))
   }
 }

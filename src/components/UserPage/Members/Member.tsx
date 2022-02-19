@@ -6,7 +6,7 @@ import { SomeNetLink } from '../../common/SomeNetLink'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppStateType } from '../../../redux/redux-store'
 import { deleteMember } from "../../../Hook/useMembers"
-import emptyAvaImg from '../../../Assets/logo/emptyAva.png'
+import emptyAvaImg from '../../../Assets/emptyAva.png'
 import styles from "./members.module.scss";
 
 type MemberProps = {

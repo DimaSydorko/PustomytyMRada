@@ -6,7 +6,7 @@ function timeout(ms: number) {
 }
 
 export const apiFiles = {
-  async add(Files: Array<BlobType>, folder: string, groupName: string, groupFileType: string, callBack: (newFiles: Array<FileInStore>) => void) {
+  async add(Files: BlobType[], folder: string, groupName: string, groupFileType: string, callBack: (newFiles: FileInStore[]) => void) {
     const filesUrl = [] as Array<FileInStore>
     Files.length > 0 ?
     await new Promise (resolve => {
