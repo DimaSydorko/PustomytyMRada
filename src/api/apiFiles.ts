@@ -42,7 +42,7 @@ export const apiFiles = {
     })
     : callBack(filesUrl)
   },
-  delete(folder: string, groupName: string, groupFileType: string, files: Array<FileInStore>) {
+  delete(folder: string, groupName: string, groupFileType: string, files: FileInStore[]) {
     let desertRef = firebase.storage().ref(`${folder}/${groupName}/${groupFileType}`)
 
     files.map(async file => {

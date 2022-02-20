@@ -1,26 +1,17 @@
-import React, {useRef, useState} from "react";
-import firebase from "firebase";
-import {MAX_FILE_SIZE_MB} from "../Utils/constants";
+import firebase from "../Utils/firebase";
 import {fbStorage} from "../Utils/firebase";
 import {FileInStore} from "../Utils/types";
 
 export default function useUploadFile() {
-  const [currentUploadingFile, setCurrentUploadFile] = useState<undefined | File>();
-  const [isUploadInProgress, setIsUploadInProgress] = useState<boolean>(false);
-  const [uploadProgressPercentage, setUploadProgressPercentage] = useState<number>(0);
-  const [uploadError, setUploadError] = useState<string>('');
-  const uploadTask = useRef<firebase.storage.UploadTask | undefined>();
-
-   const uploadFile = (
-    selectedFile: Blob | Uint8Array | ArrayBuffer,
-    storageFolder: string, name: string,
+  const uploadFile = (
+    selectedFile: File,
+    storageFolder: string,
     onUploadComplete: (storedFile: FileInStore) => void
   ) => {
     const currentUploadTask = fbStorage
       .ref()
-      .child(`${storageFolder}/${name}`)
+      .child(`${storageFolder}/${new Date().getTime() + selectedFile.name}`)
       .put(selectedFile);
-    uploadTask.current = currentUploadTask;
     const uploadedFileRef = currentUploadTask.snapshot.ref
     uploadedFileRef
       .getDownloadURL()
@@ -33,31 +24,49 @@ export default function useUploadFile() {
         onUploadComplete(storedFile);
       })
       .catch(error => {
-        setUploadError('There was a problem uploading this file.');
         throw error;
       });
   }
 
-  const handleCancelUpload = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
 
-    uploadTask.current?.cancel();
-    setIsUploadInProgress(false);
-    setUploadProgressPercentage(0);
-    uploadTask.current = undefined;
+  const uploadFiles = (
+    files: File[],
+    onComplete: (filesInStore: FileInStore[]) => void,
+    folderName: string,
+  ) => {
+    if (!files?.length) {
+      onComplete([] as FileInStore[])
+      return;
+    }
+    const length = files.length;
+    const filesInStore = [] as FileInStore[];
+    files.forEach((file, idx) => {
+
+      const onCompleteArray = (fileInStore: FileInStore) => {
+        filesInStore.push(fileInStore);
+        if (idx + 1 >= length) {
+          onComplete(filesInStore);
+        }
+      }
+      uploadFile(file, folderName, onCompleteArray)
+    })
+
   };
 
-  const clearError = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
 
-    setUploadError('');
-    setIsUploadInProgress(false);
-    setUploadProgressPercentage(0);
-    uploadTask.current = undefined;
-  };
-
+  const onDelete = (files: FileInStore[]) => {
+    files.forEach(file => (
+      firebase
+        .storage()
+        .ref(file.id)
+        .delete()
+        .catch((error) => console.error(error))
+    ))
+  }
 
   return {
     uploadFile,
+    onDelete,
+    uploadFiles,
   }
 }

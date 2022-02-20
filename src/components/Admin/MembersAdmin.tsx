@@ -6,7 +6,6 @@ import * as yup from 'yup'
 import {UploadFile} from 'antd/lib/upload/interface'
 import {addNewMember} from '../../Hook/useMembers'
 import ButtonWithModal from '../common/ButtonWIthModalSubmit/ButtonWIthModalSubmit'
-import UploadImages from '../common/UploadFiles/UploadImages'
 import MyInput from "../common/MyInput/MyInput";
 import {fbDatabase} from "../../Utils/firebase";
 import {BlobType, DepartmentsT} from '../../Utils/types'
@@ -80,7 +79,7 @@ export default function MembersAdminPage() {
               <MyInput name={"FullName"} placeholder={"Повне Ім`я"}/>
               <MyInput name={"InstagramLink"} placeholder={"Силка на Instagram"}/>
               <MyInput name={"FacebookLink"} placeholder={"Силка на Facebook"}/>
-              {/*<UploadImages imgCount={1} isCrop={true} fileList={newImg} setNewFiles={setNewImg}/>*/}
+
               <ButtonWithModal header={'Підтвердіть нового учасника'} handleSubmit={handleSubmit}/>
             </Form>
           )

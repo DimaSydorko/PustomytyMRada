@@ -1,19 +1,23 @@
 import React, {useRef, useState} from 'react'
-import {Button} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import {MAX_FILE_SIZE_MB} from "../../../Utils/constants";
 import styles from './uploadFiles.module.scss';
+import {FilePreview} from "./FilePreview/FilePreview";
+import {DeleteOutline} from "@mui/icons-material";
+import ImagePreview from "./ImagePreview";
 
 type Props = {
   files?: Blob[];
-  onAddFile: (file: Blob) => void;
+  setFile: (file: Blob[]) => void;
   maxUploadCount?: number;
   accept: 'image/*' | 'application/pdf';
 }
 
-export default function UploadFiles({maxUploadCount = 1, accept, onAddFile, files}: Props) {
+export default function UploadFiles({maxUploadCount = 1, accept, setFile, files}: Props) {
   const [uploadError, setUploadError] = useState<string>('');
   const hiddenFileInput = useRef<HTMLElement | null>(null) as React.MutableRefObject<HTMLInputElement>;
   const isImage = accept === 'image/*';
+  const isPdf = accept === 'application/pdf';
 
   const handleClick = () => {
     hiddenFileInput.current && hiddenFileInput.current.click();
@@ -27,13 +31,18 @@ export default function UploadFiles({maxUploadCount = 1, accept, onAddFile, file
       setUploadError(`This file is too big! The maximum size is ${MAX_FILE_SIZE_MB} megabytes.`);
       return;
     }
-    onAddFile(selectedFile as any);
+    setFile([...(files || []), selectedFile])
+  }
+
+  const onDelete = (file: Blob | File) => {
+    if (file && files)
+      setFile(files?.filter(value => value !== file))
   }
 
   return (
     <>
-      <Button onClick={handleClick}>
-        Upload (Max: {maxUploadCount})
+      <Button onClick={handleClick} disabled={maxUploadCount <= (files?.length || 0)}>
+        Upload {isImage ? 'Image' : 'Pdf'} (Max: {maxUploadCount})
       </Button>
       <input
         type='file'
@@ -46,13 +55,12 @@ export default function UploadFiles({maxUploadCount = 1, accept, onAddFile, file
       {uploadError && <div className={styles.uploadError}>uploadError</div>}
       {isImage && (
         <div className={styles.uploadImagePreviewContainer}>
-          {files?.map((image, idx) => (
-            <div key={idx}>
-              <img src={URL.createObjectURL(image)} alt={''} className={styles.uploadImagePreview}/>
-            </div>
+          {files?.map(image => (
+            <ImagePreview image={image} onDelete={onDelete}/>
           ))}
         </div>
       )}
+      {isPdf && <FilePreview filesPreview={files as File[]} onDelete={onDelete}/>}
     </>
   )
 }

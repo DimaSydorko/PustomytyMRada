@@ -7,7 +7,6 @@ import {DesktopDateTimePicker} from "@mui/lab";
 import {UploadFile} from "antd/lib/upload/interface"
 import {addNewEvent} from "../../Hook/useEvent"
 import ButtonWithModal from "../common/ButtonWIthModalSubmit/ButtonWIthModalSubmit"
-import UploadImages from "../common/UploadFiles/UploadImages"
 import MyInput from "../common/MyInput/MyInput";
 import {BlobType} from "../../Utils/types"
 
@@ -83,7 +82,6 @@ export default function EventAdmin() {
           <MyInput name={'locationLink'} placeholder={"Силка на місце проведення"}/>
           <MyInput name={'sponsorsName'} placeholder={"Спонсори події"}/>
 
-          {/*<UploadImages imgCount={5} fileList={newImages} setNewFiles={setNewImages}/>*/}
 
           <ButtonWithModal header={'Підтвердіть піблікацію події'} handleSubmit={handleSubmit}/>
         </Form>

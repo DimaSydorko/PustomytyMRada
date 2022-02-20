@@ -8,7 +8,7 @@ export const apiPosts = {
     newFilesUrl: FileInStore[],
     newImagesUrl: FileInStore[],
   ) {
-    firestore
+    return firestore
       .collection('posts')
       .add({
         header: newPost.header,

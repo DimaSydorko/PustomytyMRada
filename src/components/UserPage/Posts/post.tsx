@@ -1,13 +1,13 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import ConfirmButton from '../../common/ConfirmButton'
-import {Carousel} from '../../common/Carousel/Carousel'
-import {FilePreview} from '../../common/UploadFiles/FilePreview/filePreview'
-import {AppStateType} from '../../../redux/redux-store'
-import {PostType} from '../../../Utils/types'
-import styles from './PostsUser.module.scss'
 import {Divider} from "@mui/material";
 import usePost from "../../../Hook/UsePost";
+import {AppStateType} from '../../../redux/redux-store'
+import ConfirmButton from '../../common/ConfirmButton'
+import {Carousel} from '../../common/Carousel/Carousel'
+import {FilePreview} from '../../common/UploadFiles/FilePreview/FilePreview'
+import {PostType} from '../../../Utils/types'
+import styles from './PostsUser.module.scss'
 
 export type MyOvnPostPropsType = {
   post: PostType
@@ -18,7 +18,7 @@ export const Post = React.memo(({post}: MyOvnPostPropsType) => {
     const {deletePost} = usePost()
 
     const onConfirm = () => {
-      isAdmin && deletePost(post.id, post.header, post.files, post.images);
+      isAdmin && deletePost(post.id, post.files, post.images);
     }
 
     return (

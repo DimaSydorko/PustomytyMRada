@@ -3,6 +3,19 @@
 .upload {
   display: none;
   &Image {
+    &Container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed const.$color_primary;
+      background: #00000020;
+      border-radius: 5px;
+      height: calc(0.5 * 255px);
+      width: calc(0.5 * 400px);
+      overflow: hidden;
+      position: relative;
+      box-shadow: const.$box-shadow;
+    }
     &Button {
       border: const.$color_primary 2px dashed;
       border-radius: 50%;
@@ -20,10 +33,8 @@
     }
     &Preview {
       height: calc(0.5 * 255px);
-      display: block;
       max-width: calc(0.5 * 400px);
-      position: relative;
-      overflow: hidden;
+      display: block;
       pointer-events: none;
       &Container {
         display: flex;
@@ -33,9 +44,14 @@
       }
     }
   }
-
   &Error {
     color: const.$color_error;
     margin: 4px 24px 8px;
   }
+}
+
+.deleteButton {
+  position: absolute;
+  top: 2px;
+  right: 2px;
 }

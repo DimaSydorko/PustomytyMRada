@@ -34,18 +34,18 @@ export default function PostAdminPage() {
     date && setNewData(date)
   }
 
-  const onAddFile = (file: Blob) => {
-    setNewFiles(value => [...(value || []), file])
-  }
-
   const onSubmit = ({newHeader, newText}: FormType, {resetForm}: FormFunctionType) => {
+    const onComplete = () => {
+
+    };
+
     addNewPost({
       header: newHeader,
       text: newText,
       images: newImages,
       data: newData,
       files: newFiles,
-    })
+    }, onComplete)
     resetForm()
     setNewFiles([])
     setNewImages([])
@@ -69,8 +69,8 @@ export default function PostAdminPage() {
           />
           <MyInput name="newHeader" placeholder="Заголовок для поста"/>
           <MyInput type='textarea' name="newText" contentEditable placeholder="Тут ви можете написати новий пост..."/>
-          {/*<UploadImages imgCount={5} fileList={newImages} setNewFiles={setNewImages}/>*/}
-          <UploadFiles accept={'image/*'} maxUploadCount={5} onAddFile={onAddFile} files={newFiles}/>
+          <UploadFiles accept={'image/*'} maxUploadCount={5} setFile={setNewImages} files={newImages}/>
+          <UploadFiles accept={'application/pdf'} maxUploadCount={5} setFile={setNewFiles} files={newFiles}/>
           <ButtonWithModal header={'Підтвердіть піблікацію поста'} handleSubmit={handleSubmit}/>
         </Form>
       )}
